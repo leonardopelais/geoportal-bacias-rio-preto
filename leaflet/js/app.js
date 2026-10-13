@@ -179,7 +179,7 @@ function montarLegendas() {
     const c = state.meta.classes.find(x => x.valor === id);
     return c ? `<li><span class="sw" style="background:${c.cor}"></span>${esc(c.nome)}</li>` : '';
   }).join('');
-  $('#iqaLegend').innerHTML = IQA_CLASSES.map(c => `<li><i class="dot" style="background:${c.cor}"></i>${c.nome}</li>`).join('') + `<li><i class="dot" style="background:${SEM_DADO}"></i>Sem dado</li>`;
+  const FX = {'Ótima':'80–100','Boa':'52–79','Regular':'37–51','Ruim':'20–36','Péssima':'0–19'}; $('#iqaLegend').innerHTML = '<li class="lt"><b>IQA · Índice de Qualidade das Águas</b> (CETESB)<br><small>Cor da estação = classe da mediana 2018–2021. Quanto maior o IQA, melhor a água.</small></li>' + IQA_CLASSES.map(c => `<li><i class="dot" style="background:${c.cor}"></i>${c.nome} <small>(IQA ${FX[c.nome]})</small></li>`).join('') + `<li><i class="dot" style="background:${SEM_DADO}"></i>Sem dado</li>`;
 }
 
 // ---------- UI ----------

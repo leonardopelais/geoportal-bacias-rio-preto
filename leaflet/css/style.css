@@ -113,3 +113,5 @@ table.mini td.n { text-align: right; font-variant-numeric: tabular-nums; }
   h1 { font-size: 1rem; }
   .toast { left: 12px; bottom: calc(52% + 12px); }
 }
+
+ul.inline .lt{display:block!important;flex-basis:100%;font-size:.74rem;line-height:1.35;margin-bottom:2px}ul.inline small{color:var(--muted)}
