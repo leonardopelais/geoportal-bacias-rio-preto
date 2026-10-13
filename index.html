@@ -646,9 +646,6 @@
                         <td class="visible-with-data" id="m³_s">' + (feature.properties['m³_s'] !== null ? autolinker.link(String(feature.properties['m³_s']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
-                        <td colspan="2">' + (feature.properties['Usuario'] !== null ? autolinker.link(String(feature.properties['Usuario']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <th scope="row">Finalidade</th>\
                         <td class="visible-with-data" id="Finalidade">' + (feature.properties['Finalidade'] !== null ? autolinker.link(String(feature.properties['Finalidade']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
@@ -710,10 +707,6 @@
         function pop_ETEsANA2019_10(feature, layer) {
             var popupContent = '<table>\
                     <tr>\
-                        <th scope="row">Remoção de DBO (fração)</th>\
-                        <td class="visible-with-data" id="ETE_PC_REMOCAODBO">' + (feature.properties['ETE_PC_REMOCAODBO'] !== null ? autolinker.link(String(feature.properties['ETE_PC_REMOCAODBO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
-                    </tr>\
-                    <tr>\
                         <td colspan="2">' + (feature.properties['ETE_NM'] !== null ? autolinker.link(String(feature.properties['ETE_NM']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
                     <tr>\
@@ -728,7 +721,11 @@
                         <th scope="row">Corpo receptor</th>\
                         <td class="visible-with-data" id="ETE_NM_CORPORECEPTOR">' + (feature.properties['ETE_NM_CORPORECEPTOR'] !== null ? autolinker.link(String(feature.properties['ETE_NM_CORPORECEPTOR']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
                     </tr>\
-                </table>';
+                <tr>\
+                        <th scope="row">Remoção de DBO (projeto)</th>\
+                        <td class="visible-with-data" id="ETE_PC_REMOCAODBO">' + (feature.properties['ETE_PC_REMOCAODBO'] !== null ? autolinker.link(String(feature.properties['ETE_PC_REMOCAODBO']).replace(/'/g, '\'').toLocaleString()) : '') + '</td>\
+                    </tr>\\
+                    </table>';
             var content = removeEmptyRowsFromPopupContent(popupContent, feature);
 			layer.on('popupopen', function(e) {
 				addClassToPopupIfMedia(content, e.popup);
@@ -941,7 +938,7 @@
         var overlaysTree = [
             {label: '<img src="legend/EstaesdequalidadedaguaCETESB_11.png" /> Estações de qualidade da água (CETESB)', layer: layer_EstaesdequalidadedaguaCETESB_11},
             {label: '<img src="legend/ETEsANA2019_10.png" /> ETEs (ANA 2019)', layer: layer_ETEsANA2019_10},
-            {label: '<img src="legend/Captaesdeabastecimentopblicooutorgas2016_9.png" /> Captações de abastecimento público (outorgas 2016)', layer: layer_Captaesdeabastecimentopblicooutorgas2016_9},
+            {label: '<img src="legend/Captaesdeabastecimentopblicooutorgas2016_9.png" /> Captações outorgadas (estaduais, 2016)', layer: layer_Captaesdeabastecimentopblicooutorgas2016_9},
             {label: '<img src="legend/LimitedeSJdoRioPreto_8.png" /> Limite de S. J. do Rio Preto', layer: layer_LimitedeSJdoRioPreto_8},
             {label: '<img src="legend/Riosprincipaisrtulos_7.png" /> Rios principais (rótulos)', layer: layer_Riosprincipaisrtulos_7},
             {label: '<img src="legend/RiosprincipaisStrahler5_6.png" /> Rios principais (Strahler ≥ 5)', layer: layer_RiosprincipaisStrahler5_6},
@@ -1101,7 +1098,7 @@
         var about = L.control({position: 'topleft'});
         about.onAdd = function () {
             var d = L.DomUtil.create('div', 'ab-box');
-            d.innerHTML = '<a href="#" class="ab-btn" title="Sobre este mapa">ℹ Sobre</a><div class="ab-panel" style="display:none"><b>Bacias que abastecem Rio Preto</b><p>Mapa interativo do uso do solo (MapBiomas, 2024) e da qualidade da água (CETESB, mediana 2018–2021) nas 7 ottobacias de nível 5 que abastecem a região de São José do Rio Preto (SP).</p><p>Projeto pessoal de portfólio, feito somente com dados públicos. Não representa o SeMAE nem qualquer órgão público.</p><p><b>Como interpretar:</b> as relações entre uso do solo e qualidade da água são associações (13 estações com dados), não prova de causa. A rede de monitoramento não mede agrotóxicos; ausência de sinal para a cana não significa ausência de efeito. Os percentuais de uso do solo nos popups das estações são de 2021; a camada raster é de 2024. Captações são as outorgas estaduais de 2016.</p><p>Autor: Leonardo Pelais · <a href="https://www.linkedin.com/in/leonardo-pelais" target="_blank">LinkedIn</a> · <a href="https://github.com/leonardopelais" target="_blank">GitHub</a></p></div>';
+            d.innerHTML = '<a href="#" class="ab-btn" title="Sobre este mapa">ℹ Sobre</a><div class="ab-panel" style="display:none"><b>Bacias que abastecem Rio Preto</b><p>Mapa interativo do uso do solo (MapBiomas, 2024) e da qualidade da água (CETESB, mediana 2018–2021) nas 7 ottobacias de nível 5 que abastecem a região de São José do Rio Preto (SP).</p><p>Projeto pessoal de portfólio, feito somente com dados públicos. Não representa o SeMAE nem qualquer órgão público.</p><p><b>Como interpretar:</b> as relações entre uso do solo e qualidade da água são associações (13 estações com dados), não prova de causa. A rede de monitoramento não mede agrotóxicos; ausência de sinal para a cana não significa ausência de efeito. Os percentuais de uso do solo nos popups das estações são de 2021; a camada raster é de 2024. Captações são as outorgas estaduais de 2016, de diversas finalidades (cerca de metade para abastecimento público; ver popup).</p><p>Autor: Leonardo Pelais · <a href="https://www.linkedin.com/in/leonardo-pelais" target="_blank">LinkedIn</a> · <a href="https://github.com/leonardopelais" target="_blank">GitHub</a></p></div>';
             L.DomEvent.disableClickPropagation(d); L.DomEvent.disableScrollPropagation(d);
             d.querySelector('.ab-btn').addEventListener('click', function (e) { e.preventDefault(); var pn = d.querySelector('.ab-panel'); var abrir = pn.style.display === 'none'; pn.style.display = abrir ? 'block' : 'none'; if (abrir && window._lgBox) { window._lgBox._lgSet(false); } });
             return d;

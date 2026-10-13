@@ -9,7 +9,7 @@ Projeto pessoal de portfólio, feito somente com **dados públicos**. Não repre
 - Ottobacias nível 5 (nomeadas) e nível 6 (camada opcional)
 - Rios principais, limite de São José do Rio Preto e municípios
 - 16 estações de qualidade da água dentro das bacias (13 com dados): clique para ver IQA, E. coli, fósforo, turbidez, OD, DBO e o uso do solo da bacia de contribuição em 2021
-- ETEs (ANA, 2019) e captações de abastecimento público (outorgas estaduais, 2016) — sem nomes de usuários
+- ETEs (ANA, 2019) e captações outorgadas (outorgas estaduais, 2016; 1.022 pontos, ~50% para abastecimento público, o restante de outras finalidades) — sem nomes de usuários
 - Busca por endereço, medição de distâncias e mapas de base (satélite Esri e OpenStreetMap)
 
 ## Como interpretar
@@ -24,7 +24,7 @@ Projeto pessoal de portfólio, feito somente com **dados públicos**. Não repre
 | Ottobacias, trechos de drenagem (BHO 2017) | ANA / SNIRH |
 | Qualidade da água | CETESB, via indicadores de qualidade do SNIRH/ANA (1978–2021) |
 | ETEs (2019) | ANA / SNIRH |
-| Outorgas de abastecimento público (2016) | DAEE/ANA, via SNIRH |
+| Outorgas estaduais de captação (2016) | DAEE/ANA, via SNIRH |
 | Limites municipais e estaduais | IBGE |
 | Mapas de base | Esri World Imagery; © OpenStreetMap contributors |
 
