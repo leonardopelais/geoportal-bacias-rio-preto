@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bacias que abastecem Rio Preto – geoportal 3D</title>
+<meta name="description" content="Versão 3D do geoportal das bacias que abastecem São José do Rio Preto: relevo, uso do solo (MapBiomas) e qualidade da água (CETESB). Dados públicos.">
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="map" aria-label="Mapa 3D"></div>
+
+<aside id="panel" class="panel" aria-label="Controles">
+  <button id="toggle" class="toggle" aria-expanded="true" aria-label="Recolher controles">☰</button>
+  <div id="panelBody">
+    <h1>Bacias que abastecem<br>São José do Rio Preto <span class="tag">3D</span></h1>
+    <p class="sub">Relevo, uso do solo e qualidade da água · dados públicos</p>
+      <p class="muted" style="margin:8px 0 0;font-size:.78rem">Outras versões: <a href="../leaflet/">Leaflet</a> · <a href="../qgis2web/">qgis2web</a></p>
+
+    <div class="group">
+      <h2>Câmera</h2>
+      <div class="row">
+        <button class="btn" data-view="tilt">Inclinada</button>
+        <button class="btn" data-view="top">Planta</button>
+        <button class="btn" data-view="low">Rasante</button>
+        <button class="btn" id="spin" aria-pressed="false">Girar</button>
+      </div>
+      <label class="slider">Exagero do relevo <b id="exV">4×</b>
+        <input id="ex" type="range" min="1" max="10" step="0.5" value="4"></label>
+    </div>
+
+    <div class="group">
+      <h2>Uso do solo <span class="src">MapBiomas Col. 10</span></h2>
+      <div class="seg" role="group" aria-label="Ano">
+        <button data-ano="off" aria-pressed="false">Oculto</button>
+        <button data-ano="1985" aria-pressed="false">1985</button>
+        <button data-ano="2024" aria-pressed="true">2024</button>
+      </div>
+      <label class="slider">Opacidade <input id="op" type="range" min="0.2" max="1" step="0.05" value="0.8"></label>
+    </div>
+
+    <div class="group">
+      <h2>Camadas</h2>
+      <label class="opt"><input type="radio" name="base" value="sat" checked> Satélite</label>
+      <label class="opt"><input type="radio" name="base" value="osm"> OpenStreetMap</label>
+      <label class="opt"><input type="checkbox" id="c-hill" checked> Sombreamento do relevo</label>
+      <label class="opt"><input type="checkbox" id="c-n5" checked> Ottobacias nível 5</label>
+      <label class="opt"><input type="checkbox" id="c-rios" checked> Rios principais</label>
+      <label class="opt"><input type="checkbox" id="c-sjrp" checked> Limite de S. J. do Rio Preto</label>
+      <label class="opt"><input type="checkbox" id="c-est" checked> Estações de qualidade da água</label>
+      <label class="opt"><input type="checkbox" id="c-col" checked> Colunas de E. coli <small>(altura = log₁₀)</small></label>
+      <label class="opt"><input type="checkbox" id="c-ete" checked> ETEs</label>
+    </div>
+    <p class="hint">Clique em uma bacia ou estação. Botão direito + arrastar ou Ctrl + arrastar inclina a câmera.</p>
+  </div>
+</aside>
+
+<section id="info" class="info" hidden aria-live="polite"></section>
+
+<div id="readout" class="readout" aria-hidden="true">Altitude: –</div>
+
+<details id="legend" class="legend" open>
+  <summary>Legenda</summary>
+  <ul id="legendUso"></ul>
+  <ul id="legendIqa" class="inline"></ul>
+</details>
+
+<div id="toast" class="toast" hidden></div>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app3d.js"></script>
+</body>
+</html>

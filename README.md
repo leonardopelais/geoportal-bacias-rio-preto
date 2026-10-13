@@ -8,6 +8,7 @@ Site: https://leonardopelais.github.io/geoportal-bacias-rio-preto/
 |---|---|---|
 | [`leaflet/`](leaflet/) | Leaflet (feita à mão) | Painel de análise por bacia e estação, uso do solo 1985 × 2024, séries históricas, busca. [README](leaflet/README.md) |
 | [`qgis2web/`](qgis2web/) | qgis2web | Exportação do projeto QGIS com ajustes manuais. [README](qgis2web/README.md) |
+| [`3d/`](3d/) | 3D (MapLibre GL JS) | Relevo 3D, uso do solo sobre o terreno, colunas de E. coli por estação. [README](3d/README.md) |
 
 Resultados são **associações**, não causalidade. A rede de monitoramento não mede agrotóxicos.
 

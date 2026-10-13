@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Bacias que abastecem Rio Preto – geoportal</title>
-<meta name="description" content="Geoportal do uso do solo (MapBiomas) e da qualidade da água (CETESB) nas bacias que abastecem São José do Rio Preto (SP). Duas versões: Leaflet e qgis2web.">
+<meta name="description" content="Geoportal do uso do solo (MapBiomas) e da qualidade da água (CETESB) nas bacias que abastecem São José do Rio Preto (SP). Três versões: Leaflet, qgis2web e 3D.">
 <style>
 :root{--bg:#f4f7f9;--card:#fff;--ink:#1c2630;--muted:#5d6b78;--line:#e0e6ea;--brand:#0b6fb8}
 @media(prefers-color-scheme:dark){:root{--bg:#12181e;--card:#171f26;--ink:#e8edf1;--muted:#98a6b2;--line:#2a343d;--brand:#4aa3e0}}
@@ -22,7 +22,7 @@ footer{margin-top:32px;font-size:.84rem;color:var(--muted)}footer a{color:var(--
 <body>
 <main>
   <h1>Bacias que abastecem São José do Rio Preto</h1>
-  <p class="lead">Uso do solo (MapBiomas) e qualidade da água (CETESB) nas 7 ottobacias que abastecem a região. Projeto pessoal feito com dados públicos, em duas versões.</p>
+  <p class="lead">Uso do solo (MapBiomas) e qualidade da água (CETESB) nas 7 ottobacias que abastecem a região. Projeto pessoal feito com dados públicos, em três versões.</p>
   <div class="grid">
     <a class="card" href="leaflet/">
       <span class="tag">Versão 2 · Leaflet</span>
@@ -34,6 +34,12 @@ footer{margin-top:32px;font-size:.84rem;color:var(--muted)}footer a{color:var(--
       <span class="tag">Versão 1 · qgis2web</span>
       <h2>Mapa exportado do QGIS</h2>
       <p>Gerado pelo plugin qgis2web a partir do projeto QGIS, com ajustes manuais de legenda, popups e créditos.</p>
+      <span class="go">Abrir →</span>
+    </a>
+    <a class="card" href="3d/">
+      <span class="tag">Versão 3 · 3D</span>
+      <h2>Relevo e colunas de qualidade da água</h2>
+      <p>MapLibre GL JS: relevo 3D com exagero ajustável, uso do solo sobre o terreno e colunas por estação com altura proporcional à E. coli.</p>
       <span class="go">Abrir →</span>
     </a>
   </div>
