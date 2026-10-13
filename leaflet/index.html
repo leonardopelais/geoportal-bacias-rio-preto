@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bacias que abastecem Rio Preto – geoportal</title>
+<meta name="description" content="Geoportal interativo do uso do solo (MapBiomas) e da qualidade da água (CETESB) nas 7 ottobacias que abastecem a região de São José do Rio Preto (SP). Dados públicos.">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="sidebar" aria-label="Painel do geoportal">
+    <button id="sheetHandle" class="sheet-handle" aria-label="Expandir ou recolher painel"><span></span></button>
+    <header class="head">
+      <h1>Bacias que abastecem <br>São José do Rio Preto</h1>
+      <p class="sub">Uso do solo e qualidade da água · 7 ottobacias · dados públicos</p>
+      <div class="search">
+        <input id="q" type="search" placeholder="Buscar estação, bacia, rio ou endereço…" autocomplete="off" aria-label="Buscar">
+        <ul id="results" class="results" hidden></ul>
+      </div>
+      <nav class="tabs" role="tablist">
+        <button role="tab" data-tab="camadas" aria-selected="true">Camadas</button>
+        <button role="tab" data-tab="analise" aria-selected="false">Análise</button>
+        <button role="tab" data-tab="sobre" aria-selected="false">Sobre</button>
+      </nav>
+    </header>
+
+    <section id="tab-camadas" class="tab" role="tabpanel">
+      <div class="group">
+        <h2>Mapa de fundo</h2>
+        <label class="opt"><input type="radio" name="base" value="sat" checked> Satélite (Esri)</label>
+        <label class="opt"><input type="radio" name="base" value="osm"> OpenStreetMap</label>
+        <label class="opt"><input type="radio" name="base" value="light"> Claro (Carto)</label>
+      </div>
+
+      <div class="group">
+        <h2>Uso do solo <span class="src">MapBiomas Col. 10 · 30 m</span></h2>
+        <div class="seg" role="group" aria-label="Ano do uso do solo">
+          <button data-ano="off" aria-pressed="false">Oculto</button>
+          <button data-ano="1985" aria-pressed="false">1985</button>
+          <button data-ano="2024" aria-pressed="true">2024</button>
+        </div>
+        <label class="slider">Opacidade <input id="op" type="range" min="0.2" max="1" step="0.05" value="0.8"></label>
+        <details id="legend" open>
+          <summary>Legenda</summary>
+          <ul id="legendList" class="legend"></ul>
+        </details>
+      </div>
+
+      <div class="group">
+        <h2>Limites e hidrografia</h2>
+        <label class="opt"><input type="checkbox" id="l-n5" checked> Ottobacias nível 5 (7 bacias)</label>
+        <label class="opt"><input type="checkbox" id="l-n6"> Ottobacias nível 6 (63)</label>
+        <label class="opt"><input type="checkbox" id="l-rios" checked> Rios principais</label>
+        <label class="opt"><input type="checkbox" id="l-mun" checked> Municípios (IBGE)</label>
+        <label class="opt"><input type="checkbox" id="l-sjrp" checked> Limite de S. J. do Rio Preto</label>
+      </div>
+
+      <div class="group">
+        <h2>Pontos</h2>
+        <label class="opt"><input type="checkbox" id="l-est" checked> <i class="dot" style="background:#0b6fb8"></i> Estações de qualidade da água <small>(16)</small></label>
+        <label class="opt"><input type="checkbox" id="l-ete" checked> <i class="dot" style="background:#e07b00"></i> ETEs <small>(44)</small></label>
+        <label class="opt"><input type="checkbox" id="l-cap-sup"> <i class="dot" style="background:#7b3fa0"></i> Captações superficiais <small>(20)</small></label>
+        <label class="opt"><input type="checkbox" id="l-cap-sub"> <i class="dot" style="background:#6b7780"></i> Captações subterrâneas (poços) <small>(1.002)</small></label>
+        <p class="note">Estações coloridas pela classe do IQA (mediana 2018–2021):</p>
+        <ul id="iqaLegend" class="legend inline"></ul>
+      </div>
+    </section>
+
+    <section id="tab-analise" class="tab" role="tabpanel" hidden>
+      <div id="analise"></div>
+    </section>
+
+    <section id="tab-sobre" class="tab" role="tabpanel" hidden>
+      <div class="prose">
+        <p>Mapa interativo do <strong>uso do solo</strong> (MapBiomas, 1985 e 2024) e da <strong>qualidade da água</strong> (CETESB, 1978–2021) nas 7 ottobacias de nível 5 que abastecem a região de São José do Rio Preto (SP).</p>
+        <p>Projeto pessoal de portfólio, feito somente com <strong>dados públicos</strong>. Não representa o SeMAE nem qualquer órgão público.</p>
+        <h3>Como interpretar</h3>
+        <ul>
+          <li>Resultados são <strong>associações</strong>, não causalidade: 13 estações com dados, algumas sob influência de esgoto, água medida até 2021.</li>
+          <li>A rede de monitoramento <strong>não mede agrotóxicos</strong>: ausência de sinal para a cana não é evidência de ausência de efeito.</li>
+          <li>Os percentuais de uso do solo das estações são da bacia de contribuição, delimitada a partir do Copernicus DEM 30 m.</li>
+          <li>As captações são as outorgas estaduais de 2016 (1.022 pontos, 98% subterrâneas); só cerca de metade é para abastecimento público.</li>
+        </ul>
+        <h3>Fontes</h3>
+        <ul>
+          <li>Uso do solo: <a href="https://brasil.mapbiomas.org/" target="_blank" rel="noopener">MapBiomas</a>, Coleção 10</li>
+          <li>Ottobacias e drenagem (BHO 2017), ETEs 2019: <a href="https://www.gov.br/ana/" target="_blank" rel="noopener">ANA</a>/SNIRH</li>
+          <li>Qualidade da água: CETESB, via indicadores do SNIRH/ANA</li>
+          <li>Outorgas 2016: DAEE/ANA, via SNIRH</li>
+          <li>Limites: IBGE · Bases: Esri World Imagery, © OpenStreetMap, © CARTO</li>
+        </ul>
+        <p>Autor: Leonardo Pelais · <a href="https://www.linkedin.com/in/leonardo-pelais" target="_blank" rel="noopener">LinkedIn</a> · <a href="https://github.com/leonardopelais" target="_blank" rel="noopener">GitHub</a></p>
+      </div>
+    </section>
+  </aside>
+
+  <main id="map" aria-label="Mapa"></main>
+  <div id="toast" class="toast" hidden></div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="js/charts.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
